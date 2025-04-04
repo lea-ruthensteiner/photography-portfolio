@@ -1,0 +1,247 @@
+/* --- General Styles & Resets --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%; /* Ensure body takes full height */
+}
+
+body {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 300;
+    font-style: normal;
+    background-color: #ece4da; /* Light beige background from inspiration */
+    color: #333; /* Default text color */
+    line-height: 1.6;
+}
+
+img {
+    display: block; /* Removes bottom space under images */
+    max-width: 100%; /* Ensure images don't overflow containers */
+    height: auto; /* Maintain aspect ratio by default */
+}
+
+a {
+    text-decoration: none; /* Remove underlines from links */
+    color: inherit; /* Links inherit text color */
+}
+
+/* --- Homepage Styles --- */
+.home-gallery {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch; /* Make items same height */
+    padding: 20px 0; /* Reduced padding, let the container handle margins */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    gap: 20px; /* Space between items when wrapping */
+}
+
+.gallery-item {
+    position: relative; /* For absolute positioning of the title */
+    width: 31%; /* Aim for 3 items per row */
+    min-height: 500px; /* Ensure consistent height */
+    overflow: hidden; /* Hide overflow if image aspect ratio differs */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease; /* hover effect */
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px); /* lift on hover */
+}
+
+.gallery-item a {
+    display: block;
+    height: 100%; /* Ensure link covers the entire item */
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%; /* Make image fill the container */
+    object-fit: cover; /* Cover the area, cropping if needed */
+}
+
+.image-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 20px;
+    color: #cd2f1f;
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 1.5em;
+    text-align: left;
+    pointer-events: none; /* Text doesn't interfere with click */
+    width: auto; /* Adjust width if needed, auto might be better now */
+}
+
+.homepage-title {
+    margin-bottom: 0; /* used to be 80px No margin needed with flex container */
+}
+
+.container {
+    max-width: 1400px; /* Limit content width */
+    margin: 0 auto; /* Center the container */
+    padding: 40px 20px;
+}
+
+/* Title row wrapper */
+.title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline; /* Align text baselines */
+    margin-bottom: 80px; /* Space below the title area before gallery */
+}
+
+.subpage-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline; /* Align text baselines */
+}
+
+.container > h1, 
+.container > h2 {
+    margin-bottom: 0; /* Remove individual margins */
+}
+
+h1 {
+    font-family: "Gasoek One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    text-align: left;
+    color: #cd2f1f;
+    /*margin-bottom: 0px;*/
+    font-size: 3em;
+}
+
+h2 {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 200;
+    font-style: normal;
+    text-align: right;
+    font-size: 1em;
+}
+
+/* --- Portraits Subpage Styles --- */
+
+.back-link-row {
+    display: flex;
+    justify-content: space-between; /* Changed back to space-between */
+    align-items: baseline;
+    margin-bottom: 40px;
+}
+
+/* Left side for links */
+.back-links-container {
+    display: flex;
+}
+
+.back-link {
+    display: block;
+    text-align: left; 
+    color: #555;
+    font-size: 1em;
+    transition: color 0.3s ease;
+    margin-right: 20px; /* Add space between links */
+}
+
+.back-link:last-child {
+    margin-right: 0; /* Remove margin from last link */
+}
+
+/* Add specific style for h2 in back-link-row */
+.back-link-row h2 {
+    margin-left: auto; /* Push to the right */
+    margin-bottom: 0; /* No bottom margin needed here */
+}
+
+.back-link:hover {
+    color: #cd2f1f; /* Orange on hover */
+    text-decoration: underline;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop */
+    gap: 15px; /* Spacing between images */
+}
+
+.photo-grid img {
+    backface-visibility: hidden; /* Often helps with transform glitches */
+    width: 100%;
+    /* Fixed size requirement: Use aspect-ratio and object-fit */
+    aspect-ratio: 2 / 3; /* Common photo aspect ratio, adjust if needed */
+    object-fit: cover; /* Crop image to fit without distortion */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    /*transition: transform 0.3s ease;*/
+}
+
+/* --- Responsiveness --- */
+
+/* Medium Screens (Tablets) */
+@media (max-width: 992px) {
+    .gallery-item {
+        width: 45%; /* 2 items per row */
+    }
+    .image-title {
+        font-size: 2em;
+    }
+    .photo-grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    }
+    h1 {
+        font-size: 2.4em;
+    }
+}
+
+/* Small Screens (Mobiles) */
+@media (max-width: 768px) {
+     .home-gallery {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+        padding: 30px 15px;
+    }
+    .gallery-item {
+        width: 80%; /* Wider items when stacked */
+        margin-bottom: 20px; /* Space between stacked items */
+    }
+     .gallery-item:last-child {
+        margin-bottom: 0;
+    }
+    .image-title {
+        font-size: 2.2em; /* Can be slightly larger when stacked */
+    }
+
+    /* Portraits page: 2 columns on mobile */
+    .photo-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
+        gap: 10px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+    .back-link {
+        margin-bottom: 30px;
+    }
+}
+
+/* Extra Small Screens */
+@media (max-width: 480px) {
+    .gallery-item {
+        width: 95%; /* Almost full width */
+    }
+    .image-title {
+        font-size: 1.8em;
+    }
+     h1 {
+        font-size: 1.8em;
+    }
+     .photo-grid {
+        gap: 8px;
+    }
+}
